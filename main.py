@@ -83,8 +83,13 @@ with app.app_context():
     # استيراد النماذج
     import models
     
+try:
     # إنشاء الجداول
     db.create_all()
+    logging.info("تم إنشاء الجداول بنجاح")
+except Exception as e:
+    logging.error(f"حدث خطأ أثناء إنشاء الجداول: {str(e)}")
+    # استمر في تنفيذ التطبيق حتى لو فشل إنشاء الجداول
     
     # استيراد وتسجيل البلوبرنتات
     from routes import main_bp, admin_bp, student_bp
